@@ -1,0 +1,62 @@
+{
+  "name": "usb-transfer",
+  "version": "1.0.0",
+  "description": "USB File Transfer Desktop App",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"next,electron\" -c \"blue,green\" \"next dev -p 3069\" \"wait-on http://localhost:3069 && NODE_ENV=development electron .\"",
+    "build": "next build",
+    "electron:dev": "NODE_ENV=development electron .",
+    "dist": "next build && electron-builder",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@abandonware/noble": "^1.9.2-26",
+    "@devicefarmer/adbkit": "^3.2.6",
+    "express": "^5.2.1",
+    "lucide-react": "^0.344.0",
+    "next": "14.1.0",
+    "qrcode": "^1.5.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "serialport": "^13.0.0",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10",
+    "concurrently": "^8.2.2",
+    "electron": "^28.2.0",
+    "electron-builder": "^24.9.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.usbtransfer.app",
+    "productName": "USB Transfer",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*",
+      ".next/**/*",
+      "public/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
